@@ -12,6 +12,10 @@ Sistema web desenvolvido em Python com Flask para gerenciamento de tarefas, com 
 - **Indicadores Visuais:** Tarefas com custo igual ou superior a R$ 1.000,00 são destacadas automaticamente em amarelo.
 - **Ordenação Manual:** Botões para subir e descer a ordem das tarefas individualmente.
 
+- **Destaque Visual (Conditional Formatting):**
+  - Tarefas com custo elevado (acima de R$ 1.000,00) são destacadas automaticamente em **Amarelo** para alerta de orçamento.
+  - Tarefas de baixo custo permanecem com visual padrão para facilitar a leitura.
+
 ## 🛠️ Tecnologias Utilizadas
 - **Backend:** Python 3, Flask
 - **Banco de Dados:** SQLite (com tabela otimizada para ordenação).
