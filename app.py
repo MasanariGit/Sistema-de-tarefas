@@ -88,7 +88,7 @@ def editar_tarefa(id):
         conn.close()
     return redirect(url_for('index'))
 
-@app.route('/excluir/<int:id>')
+@app.route('/excluir/<int:id>', methods=['GET', 'POST'])
 def excluir_tarefa(id):
     conn = get_db()
     cursor = conn.cursor()
