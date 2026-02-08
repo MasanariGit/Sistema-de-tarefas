@@ -38,6 +38,8 @@ Como este projeto é um **MVP (Produto Mínimo Viável)** focado na demonstraç�
 ## 📝 Sobre o Desenvolvimento
 
 **Desenvolvido por: Pablo De Souza** 
+
+
 Este projeto foi desenvolvido como um **MVP (Produto Mínimo Viável)** focado na resolução de problemas reais de organização.
 
 O desafio principal foi implementar a lógica de **reordenação no banco de dados**, garantindo que a troca de posições fosse persistente e não apenas visual.
