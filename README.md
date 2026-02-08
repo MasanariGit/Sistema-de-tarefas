@@ -23,4 +23,4 @@ Se você quiser rodar este projeto na sua máquina:
 
 1. **Clone o repositório:**
    ```bash
-   git clone [https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git](https://github.com/SEU_USUARIO/SEU_REPOSITORIO.git)
+   git clone https://github.com/MasanariGit/Sistema-de-tarefas.git 
