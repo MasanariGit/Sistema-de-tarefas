@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerenciador de Tarefas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        .fundo-amarelo {
+            background-color: #ecb910 !important; 
+        }
+        .fundo-amarelo td {
+            background-color: #ecb910 !important; 
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2 class="mb-4 text-center">Lista de Tarefas</h2>
+
+        <div class="d-flex justify-content-end mb-3">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalIncluir">
+    + Nova Tarefa
+</button>
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-danger">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <table class="table table-bordered bg-white shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Custo (R$)</th>
+                    <th>Data Limite</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tarefa in tarefas %}
+                <tr class="{{ 'table-warning' if tarefa.custo >= 1000 else '' }}" data-id="{{ tarefa.id }}" style="cursor: move;">
+                    <td>{{ tarefa.id }}</td>
+                    <td>{{ tarefa.nome }}</td>
+                    <td>{{ "%.2f"|format(tarefa.custo)|replace('.', ',') }}</td>
+                    <td>{{ tarefa.data_limite.strftime('%d/%m/%Y') }}</td>
+                    <td>
+                        <a href="/subir/{{ tarefa.id }}" class="btn btn-outline-secondary btn-move" title="Subir">↑</a>
+                        <a href="/descer/{{ tarefa.id }}" class="btn btn-outline-secondary btn-move" title="Descer">↓</a>
+                        
+                        <button class="btn btn-sm btn-warning ms-2" data-bs-toggle="modal" data-bs-target="#modalEditar{{ tarefa.id }}">
+                            Editar
+                        </button>
+                        
+                        <form action="/excluir/{{ tarefa.id }}" method="POST" style="display:inline;" 
+                              onsubmit="return confirm('Tem certeza que deseja excluir esta tarefa?');">
+                            <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+
+                <div class="modal fade" id="modalEditar{{ tarefa.id }}" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Editar Tarefa</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/editar/{{ tarefa.id }}" method="POST">
+                                    <div class="mb-3">
+                                        <label>Nome da Tarefa</label>
+                                        <input type="text" name="nome" class="form-control" value="{{ tarefa.nome }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label>Custo (R$)</label>
+                                        <input type="number" step="0.01" name="custo" class="form-control" value="{{ tarefa.custo }}" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label>Data Limite</label>
+                                        <input type="date" name="data_limite" class="form-control" value="{{ tarefa.data_limite }}" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary w-100">Salvar Alterações</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr class="table-secondary">
+                    <td colspan="2" class="text-end"><strong>Total Geral:</strong></td>
+                    <td colspan="3"><strong>R$ {{ "%.2f"|format(total)|replace('.', ',') }}</strong></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="modal fade" id="modalIncluir" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title">Incluir Nova Tarefa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/incluir" method="POST">
+                        <div class="mb-3">
+                            <label>Nome da Tarefa (Único)</label>
+                            <input type="text" name="nome" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Custo (R$)</label>
+                            <input type="number" step="0.01" name="custo" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label>Data Limite</label>
+                            <input type="date" name="data_limite" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Salvar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var el = document.querySelector('tbody'); 
+            var sortable = Sortable.create(el, {
+                animation: 150, 
+                onEnd: function (evt) {
+    
+                    var ordem = [];
+                    el.querySelectorAll('tr').forEach(function (row) {
+                        ordem.push(row.getAttribute('data-id'));
+                    });
+
+                    fetch('/reordenar', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ 'ordem': ordem }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Ordem salva com sucesso!', data);
+                    })
+                    .catch((error) => {
+                        console.error('Erro ao salvar ordem:', error);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
