@@ -3,7 +3,7 @@
 Sistema web desenvolvido em Python com Flask para gerenciamento de tarefas, com foco em usabilidade e performance. O projeto permite a criação, edição, exclusão e reordenação de tarefas de forma intuitiva.
 
 ## 🔗 Link de Acesso (Demo Online)
-> **[Clique aqui para acessar o sistema online]((https://masanari.pythonanywhere.com))** 
+> **[Clique aqui para acessar o sistema online](https://masanari.pythonanywhere.com)** 
 
 ## 🚀 Funcionalidades Principais
 - **CRUD Completo:** Crie, leia, atualize e exclua tarefas facilmente.
