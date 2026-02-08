@@ -3,7 +3,7 @@
 Sistema web desenvolvido em Python com Flask para gerenciamento de tarefas, com foco em usabilidade e performance. O projeto permite a criação, edição, exclusão e reordenação de tarefas de forma intuitiva.
 
 ## 🔗 Link de Acesso (Demo Online)
-> **[Clique aqui para acessar o sistema online](AQUI_VAI_SEU_LINK_DO_PYTHONANYWHERE)**
+> **[Clique aqui para acessar o sistema online](Masanari.pythonanywhere.com)**
 
 ## 🚀 Funcionalidades Principais
 - **CRUD Completo:** Crie, leia, atualize e exclua tarefas facilmente.
@@ -23,4 +23,5 @@ Se você quiser rodar este projeto na sua máquina:
 
 1. **Clone o repositório:**
    ```bash
+
    git clone https://github.com/MasanariGit/Sistema-de-tarefas.git 
