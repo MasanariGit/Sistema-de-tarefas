@@ -17,7 +17,7 @@ Sistema web desenvolvido em Python com Flask para gerenciamento de tarefas, com 
 - **Banco de Dados:** SQLite (com tabela otimizada para ordenação).
 - **Frontend:** HTML5, CSS3, Bootstrap 5
 - **JavaScript:** SortableJS (para o Drag & Drop)
-- **Hospedagem** Pythonanywhere 
+- **Hospedagem**: Pythonanywhere 
 
 ## 📦 Como Rodar Localmente
 Se você quiser rodar este projeto na sua máquina:
@@ -25,6 +25,7 @@ Se você quiser rodar este projeto na sua máquina:
 1. **Clone o repositório:**
    ```bash
    git clone https://github.com/MasanariGit/Sistema-de-tarefas.git 
+   
    
    ## 🔮 Próximos Passos (Roadmap)
 
