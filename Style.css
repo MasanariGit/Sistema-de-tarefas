@@ -1,0 +1,88 @@
+    <style>
+        body {
+            background-color: #121212 !important;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .modal-content {
+            background-color: #2d2d2d !important;
+            color: #e0e0e0 !important;
+            border: 1px solid #444;
+        }
+
+        .modal-header, .modal-footer {
+            border-color: #444 !important;
+        }
+
+        .modal-title {
+            color: white !important;
+        }
+
+        .modal-body label {
+            color: #ffffff !important;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+       
+        .form-control {
+            background-color: #333 !important;
+            color: white !important;
+            border: 1px solid #555 !important;
+        }
+
+        .form-control:focus {
+            background-color: #444 !important;
+            color: white !important;
+            border-color: #ecb910 !important;
+            box-shadow: 0 0 5px rgba(236, 185, 16, 0.5) !important;
+        }
+
+        ::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+
+        ::placeholder {
+            color: #bbb !important;
+            opacity: 1;
+        }
+
+        table { color: #e0e0e0; }
+        .table { --bs-table-bg: transparent; --bs-table-color: #e0e0e0; border-color: #444; }
+        thead th { background-color: #0056b3 !important; color: white !important; border: none; }
+        td { vertical-align: middle; }
+
+        .fundo-amarelo {
+            background-color: #ecb910 !important;
+            color: #000000 !important;
+            font-weight: bold;
+        }
+
+        .btn { border: none !important; box-shadow: none !important; }
+        .btn-danger { background-color: #dc3545 !important; color: white !important; }
+        a { text-decoration: none; }
+    </style>
