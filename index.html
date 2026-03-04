@@ -1,104 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
+<html lang="pt-br" data-bs-theme="dark">
     <meta charset="UTF-8">
     <title>Gerenciador de Tarefas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-
-        body {
-            background-color: #121212 !important;
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: #1e1e1e;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
-            border: 1px solid #333;
-        }
-
-        h2 {
-            text-align: center;
-            color: #ffffff;
-            margin-bottom: 20px;
-            font-weight: bold;
-        }
-
-        .modal-content {
-            background-color: #2d2d2d !important;
-            color: #ffffff !important;
-            border: 1px solid #444;
-        }
-
-        .modal-header, .modal-footer {
-            border-color: #444 !important;
-        }
-
-        .modal-title {
-            color: white !important;
-        }
-
-        .modal-body label {
-            color: #ffffff !important;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .btn-close {
-            filter: invert(1) grayscale(100%) brightness(200%);
-        }
-
-        .form-control {
-            background-color: #333 !important;
-            color: white !important;
-            border: 1px solid #555 !important;
-        }
-
-        .form-control:focus {
-            background-color: #444 !important;
-            color: white !important;
-            border-color: #ecb910 !important;
-            box-shadow: 0 0 5px rgba(236, 185, 16, 0.5) !important;
-        }
-
-        ::-webkit-calendar-picker-indicator {
-            filter: invert(1); cursor: pointer;
-        }
-        ::placeholder { color: #bbb !important; opacity: 1; }
-
-        table { color: #ffffff !important; }
-        .table { --bs-table-bg: transparent; --bs-table-color: #000000; border-color: #444; }
-
-        thead th { background-color: #0056b3 !important; color: white !important; border: none; }
-        td { vertical-align: middle; font-weight: 500;  }
-
-        .fundo-amarelo {
-            background-color: #fce903 !important;
-            color: #000000 !important;
-            font-weight: bold;
-        }
-
-        .btn { border: none !important; box-shadow: none !important; }
-        .btn-danger { background-color: #dc3545 !important; color: white !important; }
-        a { text-decoration: none; }
-    </style>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container mt-5">
-        <h2 class="mb-4 text-center">Lista de Tarefas</h2>
+        <h2 class="mb-4 text-center text-white fw-bold">Lista de Tarefas</h2>
 
         <div class="d-flex justify-content-end mb-3">
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalIncluir">
     + Nova Tarefa
+
 </button>
         </div>
 
@@ -110,8 +25,8 @@
             {% endif %}
         {% endwith %}
 
-        <table class="table table-bordered bg-white shadow-sm">
-            <thead class="table-dark">
+        <table class="table table-bordered shadow-sm" data-bs-theme="light">
+             <thead style="--bs-table-bg: #0056b3; --bs-table-color: white;">
                 <tr>
                     <th>ID</th>
                     <th>Nome</th>
@@ -123,7 +38,7 @@
             <tbody>
                 {% for tarefa in tarefas %}
                 <tr class="{{ 'table-warning' if tarefa.custo >= 1000 else '' }}" data-id="{{ tarefa.id }}" style="cursor: move;">
-                    <td>{{ loop.index }}</td>
+                    <td>{{ tarefa.id }}</td>
                     <td>{{ tarefa.nome }}</td>
                     <td>{{ "%.2f"|format(tarefa.custo)|replace('.', ',') }}</td>
                     <td>{{ tarefa.data_limite[8:10] }}/{{ tarefa.data_limite[5:7] }}/{{ tarefa.data_limite[0:4] }}</td>
@@ -195,7 +110,7 @@
                         </div>
                         <div class="mb-3">
                             <label>Custo (R$)</label>
-                            <input type="number" step="0.01" name="custo" class="form-control" required>
+                            <input type="number" class="form-control" id="custo" name="custo" step="0.01" min="0" max="9999999" required>
                         </div>
                         <div class="mb-3">
                             <label>Data Limite</label>

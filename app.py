@@ -18,7 +18,7 @@ def init_db():
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS Tarefas (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nome TEXT NOT NULL UNIQUE,
+            nome TEXT NOT NULL,
             custo REAL NOT NULL,
             data_limite DATE NOT NULL,
             ordem_apresentacao INTEGER NOT NULL
@@ -49,7 +49,7 @@ def nova_tarefa():
         except ValueError:
             custo = 0.0
         data_limite = request.form['data_limite']
-        
+
         conn = get_db()
         cursor = conn.cursor()
         cursor.execute("SELECT MAX(ordem_apresentacao) as max_ordem FROM Tarefas")
@@ -57,9 +57,9 @@ def nova_tarefa():
         nova_ordem = 1
         if resultado['max_ordem'] is not None:
             nova_ordem = resultado['max_ordem'] + 1
-            
+
         try:
-            cursor.execute("INSERT INTO Tarefas (nome, custo, data_limite, ordem_apresentacao) VALUES (?, ?, ?, ?)", 
+            cursor.execute("INSERT INTO Tarefas (nome, custo, data_limite, ordem_apresentacao) VALUES (?, ?, ?, ?)",
                            (nome, custo, data_limite, nova_ordem))
             conn.commit()
         except sqlite3.IntegrityError:
@@ -79,7 +79,7 @@ def editar_tarefa(id):
     conn = get_db()
     cursor = conn.cursor()
     try:
-        cursor.execute("UPDATE Tarefas SET nome = ?, custo = ?, data_limite = ? WHERE id = ?", 
+        cursor.execute("UPDATE Tarefas SET nome = ?, custo = ?, data_limite = ? WHERE id = ?",
                        (nome, custo, data_limite, id))
         conn.commit()
     except sqlite3.IntegrityError:
